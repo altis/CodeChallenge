@@ -40,8 +40,25 @@ class CodingChallenge {
             toPrint.append(jobs_list.get(count).job + " => " + jobs_list.get(count).dependancy + "\n");
             count++;
         }
-        System.out.println("The final job sequence -)")
+        System.out.println("The final job sequence -)");
         System.out.println(toPrint);
+    }
+    public void scheduleJobs(){
+        int pointer = 0;
+        while(pointer < jobs_list.size()){
+            for(int handle = pointer; handle < jobs_list.size(); handle++){
+                if(jobs_list.get(pointer).dependancy == jobs_list.get(handle).job ){
+                    System.out.println("Dependancy");
+                    System.out.println(handle);
+                    JobClass jobToAdvance = jobs_list.remove(handle);
+                    jobs_list.add(pointer, new JobClass(jobToAdvance.job,jobToAdvance.dependancy));
+                    pointer--;
+                    break;
+                }
+
+            }
+            pointer++;
+        }
     }
     public static void main(String args[]){
 
@@ -49,6 +66,7 @@ class CodingChallenge {
 
         System.out.println("Hello");
         codeCh.inputJobs();
+        codeCh.scheduleJobs();
         codeCh.printJobs();
 
     }
