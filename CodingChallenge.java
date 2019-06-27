@@ -8,6 +8,8 @@ class JobClass{
         dependancy = d;
     }
 }
+
+
 class CodingChallenge {
     ArrayList<JobClass> jobs_list;
     CodingChallenge(){
@@ -60,7 +62,7 @@ class CodingChallenge {
             //Code to check dependant on itself
             start = jobs_list.get(pointer).job;
             visit = jobs_list.get(pointer).dependancy;
-            if(start == visit) return true; // If not check for any circular depandancy
+            if(start == visit){  System.out.println("Error ! Jobs can't depend themselves"); return true;} // If not check for any circular depandancy
             else {
                 for (int handle = 0; handle < jobs_list.size(); handle++) {
                     if (pointer != handle) {
@@ -69,18 +71,19 @@ class CodingChallenge {
                         }
                     }
                 }
-                if(start == visit) return  true;
+                if(start == visit) {  System.out.println("Error ! Detected Circular Dependancy"); return  true;}
             }
             pointer ++;
         }
         return false;
     }
+
     public static void main(String args[]){
         CodingChallenge codeCh = new CodingChallenge();
         codeCh.inputJobs();
 
         if(codeCh.checkCyclicDependancy()){
-            System.out.println("Detected Depandancy ! Jobs Terminated !");
+            System.out.println("Jobs Terminated !");
 
         } else{
             codeCh.scheduleJobs();
